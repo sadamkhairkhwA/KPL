@@ -1,0 +1,12 @@
+/* Consolidated styles */
+@import url("theme.css");
+@import url("layout.css");
+@import url("animations.css");
+@import url("professional.css");
+@import url("cursor.css");
+@import url("product-3d.css");
+@import url("motion-3d.css");
+@import url("site.css");
+@import url("a11y.css");
+@import url("network-map.css");
+@import url("enhancements.css");

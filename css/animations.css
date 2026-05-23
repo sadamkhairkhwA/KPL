@@ -1,0 +1,142 @@
+/* Scroll reveal & motion — cubic-bezier(0.4, 0, 0.2, 1) */
+
+:root {
+  --reveal-distance: 80px;
+  --reveal-duration: 1s;
+  --reveal-ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(var(--reveal-distance));
+  transition:
+    opacity var(--reveal-duration) var(--reveal-ease),
+    transform var(--reveal-duration) var(--reveal-ease);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-reveal="left"] {
+  transform: translateX(calc(var(--reveal-distance) * -1));
+}
+
+[data-reveal="right"] {
+  transform: translateX(var(--reveal-distance));
+}
+
+[data-reveal="right"].is-visible,
+[data-reveal="left"].is-visible {
+  transform: translateX(0);
+}
+
+[data-reveal="scale"] {
+  transform: scale(0.92) translateY(40px);
+}
+
+[data-reveal="scale"].is-visible {
+  transform: scale(1) translateY(0);
+}
+
+/* Hero staged animations */
+.hero-anim {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: heroFadeUp var(--reveal-duration) var(--reveal-ease) forwards;
+  animation-delay: var(--hero-delay, 0ms);
+}
+
+@keyframes heroFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Stagger children */
+[data-stagger] > .stagger-item {
+  opacity: 0;
+  transform: translateY(50px);
+  transition:
+    opacity 0.7s var(--reveal-ease),
+    transform 0.7s var(--reveal-ease);
+  transition-delay: var(--stagger-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+[data-stagger].is-visible > .stagger-item,
+.stagger-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Corridor slide from right */
+.corridor-panel {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 1s var(--reveal-ease), transform 1s var(--reveal-ease);
+}
+
+.corridor-panel.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.flow-step.stagger-item {
+  transform: translateX(40px) translateY(0);
+}
+
+[data-stagger].is-visible .flow-step.stagger-item {
+  transform: translateX(0);
+}
+
+.product-card.is-filter-exit {
+  animation: productExit 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes productExit {
+  to {
+    opacity: 0;
+    transform: perspective(800px) rotateX(-10deg) scale(0.92) translateY(-12px);
+  }
+}
+
+/* Product filter enter */
+.product-card.is-filter-enter {
+  animation: productEnter 0.5s var(--reveal-ease) forwards;
+  animation-delay: var(--filter-delay, 0ms);
+}
+
+@keyframes productEnter {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Parallax hero */
+.hero-parallax {
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  [data-stagger] > .stagger-item,
+  .corridor-panel,
+  .hero-anim {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}

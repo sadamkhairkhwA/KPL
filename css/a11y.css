@@ -1,0 +1,32 @@
+/* Accessibility */
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 1rem;
+  z-index: 100002;
+  padding: 0.65rem 1rem;
+  background: var(--color-primary-dark);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 1rem;
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.btn:focus-visible,
+.nav-link:focus-visible,
+.filter-btn:focus-visible {
+  outline-offset: 2px;
+}

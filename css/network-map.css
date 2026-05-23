@@ -1,0 +1,401 @@
+/* Nationwide network map */
+.network {
+  background: linear-gradient(180deg, var(--color-bg) 0%, #eef4fa 50%, var(--color-bg) 100%);
+  overflow: hidden;
+}
+
+.network-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 2rem;
+  align-items: stretch;
+  margin-top: 2.5rem;
+}
+
+@media (max-width: 900px) {
+  .network-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.network-map-canvas {
+  width: 100%;
+  min-height: 360px;
+}
+
+.network-map-wrap {
+  position: relative;
+  min-height: 480px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 1rem 1.25rem 2.5rem;
+  overflow: hidden;
+}
+
+.network-map-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 65% 52%, rgba(26, 95, 180, 0.08) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.network-svg {
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  display: block;
+}
+
+/* 34 provinces — colorful map like reference */
+.afg-province {
+  transition: filter 0.3s ease, stroke 0.3s ease, stroke-width 0.3s ease, opacity 0.3s ease;
+  opacity: 0.92;
+}
+
+.afg-province--hq,
+.afg-province--rep {
+  cursor: pointer;
+}
+
+.afg-province:hover {
+  filter: brightness(1.06);
+  opacity: 1;
+}
+
+.afg-province.is-active {
+  opacity: 1;
+  filter: brightness(1.1) saturate(1.15);
+}
+
+.afg-province.is-hq-province.is-active {
+  stroke: #c1121f !important;
+  stroke-width: 3.5 !important;
+}
+
+.afg-province.is-rep-province.is-active {
+  stroke: #0d4a8f !important;
+  stroke-width: 2.8 !important;
+}
+
+/* Province name labels */
+.afg-labels {
+  pointer-events: none;
+  font-family: var(--font-fa, "Inter"), system-ui, sans-serif;
+}
+
+.afg-province-label {
+  fill: rgba(15, 40, 71, 0.88);
+  paint-order: stroke fill;
+  stroke: rgba(255, 255, 255, 0.85);
+  stroke-width: 2.5px;
+  stroke-linejoin: round;
+  letter-spacing: 0.02em;
+}
+
+.afg-province-label--hub {
+  fill: #0d4a8f;
+  font-weight: 700;
+}
+
+.afg-province-label.is-active {
+  fill: #0d4a8f;
+  font-size: 10px !important;
+  font-weight: 700;
+  stroke: #fff;
+  stroke-width: 3px;
+}
+
+body.lang-fa .afg-labels,
+body.lang-ps .afg-labels {
+  font-family: var(--font-fa);
+}
+
+@media (max-width: 768px) {
+  .afg-province-label {
+    font-size: 7px !important;
+    stroke-width: 2px;
+  }
+}
+
+.network-line {
+  fill: none;
+  stroke: rgba(26, 95, 180, 0.2);
+  stroke-width: 2.5;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke 0.35s ease, stroke-width 0.35s ease, opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.network-map-wrap.is-animated .network-line {
+  animation: networkDraw 1.8s ease forwards;
+}
+
+.network-map-wrap.is-animated .network-line:nth-child(1) { animation-delay: 0.1s; }
+.network-map-wrap.is-animated .network-line:nth-child(2) { animation-delay: 0.2s; }
+.network-map-wrap.is-animated .network-line:nth-child(3) { animation-delay: 0.3s; }
+.network-map-wrap.is-animated .network-line:nth-child(4) { animation-delay: 0.4s; }
+.network-map-wrap.is-animated .network-line:nth-child(5) { animation-delay: 0.5s; }
+.network-map-wrap.is-animated .network-line:nth-child(6) { animation-delay: 0.6s; }
+.network-map-wrap.is-animated .network-line:nth-child(7) { animation-delay: 0.7s; }
+.network-map-wrap.is-animated .network-line:nth-child(8) { animation-delay: 0.8s; }
+
+.network-line.is-active {
+  stroke: var(--color-primary);
+  stroke-width: 4;
+  stroke-dashoffset: 0;
+  opacity: 1;
+  filter: drop-shadow(0 0 4px rgba(26, 95, 180, 0.45));
+}
+
+@keyframes networkDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+.network-hub {
+  cursor: pointer;
+  outline: none;
+}
+
+.network-hub-star {
+  fill: #c1121f;
+  stroke: #fff;
+  stroke-width: 1.2;
+}
+
+.network-hub-dot {
+  fill: var(--color-primary);
+  stroke: #fff;
+  stroke-width: 2;
+}
+
+.network-hub--hq .network-hub-dot {
+  fill: #0d4a8f;
+  stroke-width: 2.5;
+}
+
+.network-hub-ring {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-width: 1.5;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.network-map-wrap.is-animated .network-hub-ring {
+  animation: hubPulse 2.4s ease-out infinite;
+}
+
+.network-hub-ring--1 { animation-delay: 0s !important; }
+.network-hub-ring--2 { animation-delay: 0.75s !important; }
+
+.network-hub--hq .network-hub-ring {
+  stroke: #0d4a8f;
+}
+
+.network-hub.is-active .network-hub-dot {
+  fill: #fff;
+  stroke: var(--color-primary);
+  stroke-width: 0.5;
+}
+
+.network-hub.is-active .network-hub-ring {
+  opacity: 0.55;
+  animation: none;
+}
+
+@keyframes hubPulse {
+  0% { transform: scale(0.4); opacity: 0.7; }
+  100% { transform: scale(2.8); opacity: 0; }
+}
+
+.network-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.network-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+@media (max-width: 520px) {
+  .network-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+.network-stat {
+  padding: 1rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.network-stat-num {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  font-family: var(--font-display, inherit);
+}
+
+.network-stat-label {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  line-height: 1.35;
+}
+
+.network-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+}
+
+.network-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.network-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-primary);
+}
+
+.network-legend-dot--hq {
+  background: #0d4a8f;
+  box-shadow: 0 0 0 3px rgba(13, 74, 143, 0.2);
+}
+
+.network-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.network-list-btn {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  gap: 0.1rem 0.65rem;
+  align-items: center;
+  padding: 0.65rem 0.85rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: start;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.network-list-item.is-active .network-list-btn,
+.network-list-btn:hover {
+  border-color: var(--color-primary);
+  background: #f0f6fc;
+  box-shadow: var(--shadow-sm);
+}
+
+.network-badge {
+  grid-row: span 2;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.45rem;
+  border-radius: 4px;
+  background: rgba(26, 95, 180, 0.12);
+  color: var(--color-primary);
+}
+
+.network-badge--hq {
+  background: #0d4a8f;
+  color: #fff;
+}
+
+.network-list-city {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+
+.network-list-province {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.network-detail {
+  padding: 1.25rem;
+  background: linear-gradient(135deg, var(--color-primary) 0%, #0d4a8f 100%);
+  color: #fff;
+  border-radius: var(--radius-md);
+  min-height: 120px;
+  transition: opacity 0.3s ease;
+}
+
+.network-detail-role {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.85;
+  margin: 0 0 0.35rem;
+}
+
+.network-detail-city {
+  font-size: 1.25rem;
+  margin: 0 0 0.25rem;
+  font-family: var(--font-display, inherit);
+}
+
+.network-detail-province {
+  font-size: 0.88rem;
+  opacity: 0.9;
+  margin: 0 0 0.65rem;
+}
+
+.network-detail-desc {
+  font-size: 0.85rem;
+  line-height: 1.55;
+  opacity: 0.92;
+  margin: 0;
+}
+
+.network-route-label {
+  position: absolute;
+  bottom: 1rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .network-line,
+  .network-hub-ring {
+    animation: none !important;
+  }
+  .network-map-wrap.is-animated .network-line {
+    stroke-dashoffset: 0;
+  }
+}

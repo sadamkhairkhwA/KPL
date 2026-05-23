@@ -1,0 +1,325 @@
+/* Khairkhwa Pharma — Blue · Gray · White brand theme */
+
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap");
+
+:root {
+  --color-bg: #f8fafc;
+  --color-bg-alt: #f1f5f9;
+  --color-surface: #ffffff;
+  --color-surface-glass: rgba(255, 255, 255, 0.88);
+  --color-primary: #1a5fb4;
+  --color-primary-dark: #154a8f;
+  --color-primary-light: #3b82f6;
+  --color-gray: #6b7280;
+  --color-gray-dark: #374151;
+  --color-gray-light: #9ca3af;
+  --color-accent: #dc2626;
+  --color-emerald-deep: #374151;
+  --color-text: #1e293b;
+  --color-text-muted: #64748b;
+  --color-border: rgba(26, 95, 180, 0.14);
+  --shadow-sm: 0 1px 3px rgba(30, 41, 59, 0.06);
+  --shadow-md: 0 12px 40px rgba(26, 95, 180, 0.1);
+  --shadow-lg: 0 24px 56px rgba(21, 74, 143, 0.14);
+  --shadow-card: 0 4px 24px rgba(30, 41, 59, 0.06), 0 0 0 1px rgba(26, 95, 180, 0.08);
+  --font-display: "Plus Jakarta Sans", var(--font-sans);
+  --container: min(1160px, 92vw);
+  --header-h: 76px;
+}
+
+body {
+  background: var(--color-bg);
+  background-image:
+    radial-gradient(ellipse 90% 60% at 50% -20%, rgba(59, 130, 246, 0.08), transparent 55%),
+    linear-gradient(180deg, #ffffff 0%, var(--color-bg) 100%);
+}
+
+/* Logo */
+.logo--brand {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.logo-img {
+  height: 48px;
+  width: auto;
+  max-width: min(220px, 42vw);
+  object-fit: contain;
+  display: block;
+}
+
+.logo--footer .logo-img {
+  height: 56px;
+  max-width: 200px;
+  filter: brightness(1.1);
+}
+
+.loader {
+  background: linear-gradient(160deg, #1e3a5f 0%, #1a5fb4 50%, #2563eb 100%);
+}
+
+.loader-inner {
+  width: auto;
+  height: auto;
+}
+
+.loader-ring {
+  display: none;
+}
+
+.loader-logo {
+  position: static;
+  inset: auto;
+  animation: loaderPulse 2s ease-in-out infinite;
+}
+
+.loader-logo-img {
+  height: 88px;
+  width: auto;
+  max-width: min(320px, 85vw);
+  object-fit: contain;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.2));
+}
+
+@keyframes loaderPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 0.92;
+  }
+}
+
+.loader-text {
+  display: none;
+}
+
+/* Header */
+.header.is-scrolled {
+  background: var(--color-surface-glass);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.nav-link.active {
+  color: var(--color-primary);
+  background: rgba(26, 95, 180, 0.1);
+}
+
+.nav-link::after {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+}
+
+.lang-toggle:hover {
+  border-color: var(--color-primary-light);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+body:not(.lang-fa) .lang-opt[data-lang="en"],
+body.lang-fa .lang-opt[data-lang="fa"] {
+  background: rgba(26, 95, 180, 0.12);
+  color: var(--color-primary-dark);
+}
+
+/* Hero */
+.hero-bg {
+  background:
+    radial-gradient(ellipse 85% 65% at 80% 5%, rgba(59, 130, 246, 0.15), transparent 55%),
+    radial-gradient(ellipse 60% 50% at 5% 90%, rgba(107, 114, 128, 0.08), transparent 50%),
+    linear-gradient(165deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+}
+
+.hero-orb-1 {
+  background: #93c5fd;
+}
+
+.hero-orb-2 {
+  background: #cbd5e1;
+}
+
+.hero-orb-3 {
+  background: #60a5fa;
+}
+
+.hero-title .gradient-text {
+  background: linear-gradient(135deg, #1a5fb4 0%, #3b82f6 50%, #6b7280 100%);
+  background-size: 200% auto;
+}
+
+.hero-badge {
+  border-color: rgba(26, 95, 180, 0.25);
+  color: var(--color-primary-dark);
+}
+
+.pulse-dot {
+  background: var(--color-accent);
+}
+
+.stat-number {
+  color: var(--color-primary-dark);
+}
+
+.stat-suffix {
+  color: var(--color-primary);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #1a5fb4 0%, #2563eb 100%);
+  box-shadow: 0 10px 32px rgba(26, 95, 180, 0.35);
+}
+
+.btn-outline {
+  border-color: var(--color-primary);
+  color: var(--color-primary-dark);
+}
+
+/* Route card */
+.hero-route-card::before {
+  background: linear-gradient(90deg, #1a5fb4, #6b7280, #dc2626);
+  opacity: 0.9;
+}
+
+.route-header-tag {
+  color: var(--color-primary);
+}
+
+.route-header-title {
+  color: var(--color-gray-dark);
+}
+
+.route-node {
+  background: linear-gradient(180deg, #f8fafc, #fff);
+  border-color: var(--color-border);
+}
+
+.route-country {
+  color: var(--color-primary-dark);
+}
+
+.route-pill {
+  background: rgba(26, 95, 180, 0.1);
+  color: var(--color-primary-dark);
+  border-color: rgba(26, 95, 180, 0.2);
+}
+
+.route-pill--future {
+  background: rgba(220, 38, 38, 0.08);
+  color: #b91c1c;
+  border-color: rgba(220, 38, 38, 0.2);
+}
+
+/* Sections */
+.section-tag {
+  color: var(--color-primary);
+}
+
+.section-tag::after {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-gray-light));
+}
+
+.about-p2 {
+  background: rgba(26, 95, 180, 0.06);
+  border-left-color: var(--color-primary);
+  color: var(--color-gray-dark);
+}
+
+.partner-strip {
+  background: linear-gradient(135deg, rgba(26, 95, 180, 0.08), #fff);
+  border-color: rgba(26, 95, 180, 0.2);
+}
+
+.partner-name {
+  color: var(--color-primary-dark);
+}
+
+.feature-icon {
+  background: linear-gradient(145deg, rgba(26, 95, 180, 0.12), rgba(107, 114, 128, 0.08));
+  color: var(--color-primary);
+}
+
+.vision-card {
+  background: linear-gradient(145deg, #fff, #f8fafc);
+  border: 1px dashed rgba(26, 95, 180, 0.35);
+  border-left: 4px solid var(--color-primary);
+}
+
+html[dir="rtl"] .vision-card {
+  border-left: 1px dashed rgba(26, 95, 180, 0.35);
+  border-right: 4px solid var(--color-primary);
+}
+
+.vision-badge {
+  background: rgba(26, 95, 180, 0.12);
+  color: var(--color-primary-dark);
+}
+
+.about-card {
+  background: linear-gradient(155deg, #1a5fb4 0%, #2563eb 45%, #4b5563 100%);
+}
+
+.products.section {
+  background: linear-gradient(180deg, #f1f5f9 0%, #fff 50%, #f8fafc 100%);
+}
+
+.filter-indicator {
+  background: linear-gradient(135deg, #1a5fb4, #2563eb);
+  box-shadow: 0 6px 20px rgba(26, 95, 180, 0.35);
+}
+
+.product-cat {
+  background: rgba(26, 95, 180, 0.1);
+  color: var(--color-primary-dark);
+}
+
+.product-form {
+  color: var(--color-primary);
+}
+
+.products-sample-note {
+  color: var(--color-primary);
+}
+
+.quality-center {
+  background: linear-gradient(160deg, #eff6ff, #f8fafc);
+  border-color: #93c5fd;
+}
+
+.quality-center svg {
+  color: var(--color-primary);
+}
+
+.quality-center span {
+  color: var(--color-primary-dark);
+}
+
+.contact-icon {
+  background: rgba(26, 95, 180, 0.1);
+  color: var(--color-primary);
+}
+
+.footer {
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+}
+
+.footer-links a:hover {
+  color: #93c5fd;
+}
+
+.scroll-progress {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-gray), var(--color-accent));
+}
+
+/* Particles — overridden via JS too */
+@media (max-width: 768px) {
+  .logo-img {
+    height: 40px;
+    max-width: 160px;
+  }
+
+  :root {
+    --header-h: 68px;
+  }
+}
