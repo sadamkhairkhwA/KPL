@@ -17,6 +17,5 @@ export const SITE = {
   docs: {
     companyProfile: "assets/docs/company-profile.pdf",
     importSample: "assets/docs/import-documentation-sample.pdf",
-    partnerAuth: "assets/docs/world-medicine-authorization.pdf",
   },
 };

@@ -68,7 +68,6 @@ function initDocLinks() {
   const map = {
     "data-doc-profile": SITE.docs?.companyProfile,
     "data-doc-import": SITE.docs?.importSample,
-    "data-doc-partner": SITE.docs?.partnerAuth,
   };
   Object.entries(map).forEach(([attr, href]) => {
     if (!href) return;

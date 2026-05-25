@@ -122,8 +122,9 @@ body.lang-ps .afg-labels {
 
 .network-line {
   fill: none;
-  stroke: rgba(26, 95, 180, 0.2);
-  stroke-width: 2.5;
+  stroke: rgba(26, 95, 180, 0.42);
+  stroke-width: 4.5;
+  stroke-linecap: round;
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
   transition: stroke 0.35s ease, stroke-width 0.35s ease, opacity 0.35s ease;
@@ -145,10 +146,10 @@ body.lang-ps .afg-labels {
 
 .network-line.is-active {
   stroke: var(--color-primary);
-  stroke-width: 4;
+  stroke-width: 6;
   stroke-dashoffset: 0;
   opacity: 1;
-  filter: drop-shadow(0 0 4px rgba(26, 95, 180, 0.45));
+  filter: drop-shadow(0 0 6px rgba(26, 95, 180, 0.55));
 }
 
 @keyframes networkDraw {
@@ -163,24 +164,24 @@ body.lang-ps .afg-labels {
 .network-hub-star {
   fill: #c1121f;
   stroke: #fff;
-  stroke-width: 1.2;
+  stroke-width: 1.8;
 }
 
 .network-hub-dot {
   fill: var(--color-primary);
   stroke: #fff;
-  stroke-width: 2;
+  stroke-width: 2.5;
 }
 
 .network-hub--hq .network-hub-dot {
   fill: #0d4a8f;
-  stroke-width: 2.5;
+  stroke-width: 3;
 }
 
 .network-hub-ring {
   fill: none;
   stroke: var(--color-primary);
-  stroke-width: 1.5;
+  stroke-width: 2.2;
   opacity: 0;
   transform-box: fill-box;
   transform-origin: center;

@@ -229,10 +229,10 @@ function buildSvg(hq, hqProv, lang) {
     return `
       <g class="network-hub ${isHq ? "network-hub--hq" : ""}" data-id="${h.id}" tabindex="0" role="button"
          transform="translate(${x}, ${y})">
-        ${isHq ? '<polygon class="network-hub-star" points="0,-4 1.2,-1.2 4,0 1.2,1.2 0,4 -1.2,1.2 -4,0 -1.2,-1.2" />' : ""}
-        <circle class="network-hub-ring network-hub-ring--2" r="${isHq ? 14 : 10}" />
-        <circle class="network-hub-ring network-hub-ring--1" r="${isHq ? 9 : 7}" />
-        <circle class="network-hub-dot" r="${isHq ? 5 : 4}" />
+        ${isHq ? '<polygon class="network-hub-star" points="0,-5 1.5,-1.5 5,0 1.5,1.5 0,5 -1.5,1.5 -5,0 -1.5,-1.5" />' : ""}
+        <circle class="network-hub-ring network-hub-ring--2" r="${isHq ? 18 : 14}" />
+        <circle class="network-hub-ring network-hub-ring--1" r="${isHq ? 12 : 10}" />
+        <circle class="network-hub-dot" r="${isHq ? 6.5 : 5.5}" />
       </g>`;
   }).join("");
 

@@ -367,3 +367,46 @@ body.site-calm .hero-orbital {
   align-items: center;
   gap: 0.75rem 1rem;
 }
+
+/* B2B-only notice above products grid */
+.products-b2b-only {
+  margin: 0.75rem auto 0;
+  max-width: 760px;
+  padding: 0.75rem 1.1rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--color-primary-dark);
+  background: rgba(26, 95, 180, 0.06);
+  border: 1px solid rgba(26, 95, 180, 0.18);
+  border-left: 4px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  text-align: start;
+  line-height: 1.55;
+}
+
+/* Contact section B2B disclaimer */
+.contact-b2b-disclaimer {
+  margin-top: 0.75rem;
+  padding: 0.85rem 1rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  background: rgba(15, 40, 71, 0.04);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+}
+
+/* Footer compliance disclaimer */
+.footer-disclaimer {
+  max-width: 1100px;
+  margin: 1.5rem auto 0.5rem;
+  padding: 0.85rem 1rem;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+}

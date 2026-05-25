@@ -210,9 +210,11 @@
 
 .about-grid {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 1fr;
   gap: 3rem;
   align-items: center;
+  max-width: 920px;
+  margin: 0 auto;
 }
 
 .about-lead {
